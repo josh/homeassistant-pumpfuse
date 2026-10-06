@@ -1,0 +1,55 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ruff:
+    runs-on: ubuntu-slim
+
+    env:
+      RUFF_OUTPUT_FORMAT: github
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Ruff Formatter
+        run: uv run ruff format --diff .
+
+      - name: Ruff Linter
+        run: uv run ruff check .
+
+  mypy:
+    runs-on: ubuntu-slim
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: mypy
+        run: uv run mypy .
+
+  lockfile:
+    runs-on: ubuntu-slim
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Assert a single Home Assistant resolution
+        run: |
+          n=$(grep -c '^name = "homeassistant"$' uv.lock)
+          [ "$n" = 1 ] || {
+            echo "::error::uv.lock resolved $n homeassistant versions (expected 1) - requires-python is behind Home Assistant's own requires-python; copy HA's value into pyproject.toml, raise the homeassistant floor and hacs.json to match, then re-lock"
+            exit 1
+          }

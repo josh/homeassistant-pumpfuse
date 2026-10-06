@@ -1,0 +1,32 @@
+[project]
+name = "homeassistant-pumpfuse"
+version = "2026.10.0"
+readme = "README.md"
+license = "MIT"
+license-files = [ "LICENSE" ]
+authors = [ { name = "Joshua Peek" } ]
+requires-python = ">=3.14.2"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+]
+
+[dependency-groups]
+dev = [
+    "homeassistant>=2026.9",
+    "mypy",
+    "ruff",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+lint.extend-select = [ "I", "UP" ]
+
+[tool.pyproject-fmt]
+indent = 4
+max_supported_python = "3.14"
+
+[tool.mypy]
+strict = true

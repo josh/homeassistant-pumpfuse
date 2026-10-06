@@ -1,0 +1,213 @@
+{
+  "title": "PumpFuse Sump Pump Monitor",
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Connect to PumpFuse",
+        "description": "Monitor a PumpFuse Sump Pump Monitor over its local REST API. No MQTT broker or credentials are needed.",
+        "data": {
+          "host": "Host",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      },
+      "reconfigure": {
+        "title": "Connect to PumpFuse",
+        "description": "Monitor a PumpFuse Sump Pump Monitor over its local REST API. No MQTT broker or credentials are needed.",
+        "data": {
+          "host": "Host",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      },
+      "discovery_confirm": {
+        "title": "Add {name}",
+        "description": "Set up the PumpFuse Sump Pump Monitor {name} found at {host}?"
+      }
+    },
+    "error": {
+      "invalid_host": "Enter an IPv4 address or hostname without a scheme or port.",
+      "unsupported_model": "That address answered, but does not look like a PumpFuse Sump Pump Monitor.",
+      "cannot_connect": "Unable to read the monitor's status. Check the address and that the monitor is on the network."
+    },
+    "abort": {
+      "already_configured": "This monitor is already configured.",
+      "wrong_device": "The address belongs to a different monitor.",
+      "cannot_connect": "Unable to read the monitor's status.",
+      "not_supported": "This device is not a PumpFuse Sump Pump Monitor.",
+      "reconfigure_successful": "Configuration updated."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "pump_running": {
+        "name": "Pump running"
+      },
+      "power_anomaly_low": {
+        "name": "Low power"
+      },
+      "power_anomaly_high": {
+        "name": "High power"
+      },
+      "long_run": {
+        "name": "Excessive run"
+      },
+      "frequent_cycling": {
+        "name": "Short cycling"
+      },
+      "inactivity": {
+        "name": "Expected run"
+      },
+      "protection_auto_disabled": {
+        "name": "Protection disabled"
+      },
+      "lockout_active": {
+        "name": "Lockout",
+        "state_attributes": {
+          "alert": {
+            "name": "Alert"
+          },
+          "retries_used": {
+            "name": "Retries used"
+          },
+          "max_retries": {
+            "name": "Max retries"
+          }
+        }
+      }
+    },
+    "button": {
+      "reset_lockout": {
+        "name": "Reset lockout"
+      },
+      "reset_stats": {
+        "name": "Reset statistics"
+      }
+    },
+    "event": {
+      "event": {
+        "name": "Event",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "alert_fired": "Alert fired",
+              "alert_cleared": "Alert cleared",
+              "power_outage": "Power outage",
+              "protection_auto_disabled": "Protection auto-disabled",
+              "mode_change": "Mode change",
+              "lockout_reset": "Lockout reset",
+              "device_boot": "Device boot"
+            }
+          }
+        }
+      }
+    },
+    "number": {
+      "inactivity_window": {
+        "name": "Inactivity window"
+      },
+      "lockout_duration": {
+        "name": "Lockout duration"
+      },
+      "max_retries": {
+        "name": "Max retries"
+      }
+    },
+    "sensor": {
+      "power": {
+        "name": "Power"
+      },
+      "protection_mode": {
+        "name": "Protection mode",
+        "state": {
+          "learning": "Learning",
+          "active": "Active",
+          "suspended": "Suspended",
+          "disabled": "Disabled"
+        }
+      },
+      "current_run": {
+        "name": "Current run"
+      },
+      "last_run_duration": {
+        "name": "Last run duration"
+      },
+      "last_run_time": {
+        "name": "Last run time"
+      },
+      "total_runs": {
+        "name": "Total runs"
+      },
+      "runs_last_24h": {
+        "name": "Runs last 24h"
+      },
+      "average_run_duration": {
+        "name": "Average run duration"
+      },
+      "baseline_power": {
+        "name": "Baseline power"
+      },
+      "last_outage": {
+        "name": "Last outage"
+      },
+      "total_runtime": {
+        "name": "Total runtime"
+      },
+      "last_run_average_power": {
+        "name": "Last run average power"
+      },
+      "last_run_peak_power": {
+        "name": "Last run peak power"
+      },
+      "lockout_remaining": {
+        "name": "Lockout remaining"
+      },
+      "inter_run_gap": {
+        "name": "Average time between runs"
+      },
+      "on_threshold": {
+        "name": "Running threshold"
+      },
+      "idle_power": {
+        "name": "Idle power"
+      },
+      "learned_cycles": {
+        "name": "Learned cycles"
+      },
+      "wifi_signal": {
+        "name": "Wi-Fi signal"
+      },
+      "uptime": {
+        "name": "Uptime"
+      }
+    },
+    "switch": {
+      "relay": {
+        "name": "Pump power"
+      },
+      "alert_power_anomaly_low": {
+        "name": "Low power alert"
+      },
+      "alert_power_anomaly_high": {
+        "name": "High power alert"
+      },
+      "alert_long_run": {
+        "name": "Excessive run alert"
+      },
+      "alert_frequent_cycling": {
+        "name": "Short cycling alert"
+      },
+      "alert_inactivity": {
+        "name": "Expected run alert"
+      },
+      "relay_cut_power_anomaly_low": {
+        "name": "Cut power on low power"
+      },
+      "relay_cut_power_anomaly_high": {
+        "name": "Cut power on high power"
+      },
+      "relay_cut_long_run": {
+        "name": "Cut power on excessive run"
+      }
+    }
+  }
+}
