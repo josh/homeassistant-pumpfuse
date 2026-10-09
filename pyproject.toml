@@ -1,6 +1,6 @@
 [project]
 name = "homeassistant-pumpfuse"
-version = "0.0.0"
+version = "2026.10.0"
 readme = "README.md"
 license = "MIT"
 license-files = [ "LICENSE" ]
